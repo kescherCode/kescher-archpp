@@ -1,0 +1,26 @@
+# Maintainer: Jeremy Kescher <jeremy@kescher.at>
+
+pkgname=kescher-keyring
+pkgver=20210613
+pkgrel=1
+pkgdesc="kescher.at builds GPG keyring"
+arch=('any')
+url="https://mirror.kescher.at"
+license=('MIT')
+install=$pkgname.install
+source=(kescher.gpg
+        kescher-revoked
+        kescher-trusted
+        $pkgname.install)
+
+sha512sums=('b32bee0315e64a98f31ea89402c58d145034257af65d1fba1bdfdf0ad5bb9b8649a4ef9dd6249dc27b8f8190874800e2818b3a65a9e2ed62e597e4e3f25faafa'
+            'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e'
+            '237a9351447afa6b61baa52fa33256d7456fcc43b8d44df543c7a1c8bc85ff104ac8ff964f761946fd990ff9dc5cf2455803d911bdfac60878dd890d010d06d3'
+            'd86753c1acd3a3838184bd61c729ac28ac731595122e254f4a5cb106679f588dfe91a719d9ab8f11baac87b78c909f08850d476ed38555fdb1b4e17dd60ebd87')
+
+package() {
+    local destdir=usr/share/pacman/keyrings
+
+    install -d $pkgdir/$destdir
+    install -Dm644 kescher{.gpg,-trusted,-revoked} $pkgdir/$destdir/
+}
