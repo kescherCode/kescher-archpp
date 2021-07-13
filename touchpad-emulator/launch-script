@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Fun fact: This should not be done, but I can't be arsed since upstream maintainer did this.
+# Might contribute a udev rule there at some point.
+sudo chmod 777 /dev/uinput
+
+/usr/lib/touchpad-emulator/TouchpadEmulator /dev/input/by-path/platform-1c2ac00.i2c-event /dev/input/by-path/platform-1c21800.lradc-event
