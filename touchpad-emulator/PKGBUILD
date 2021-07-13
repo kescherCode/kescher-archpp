@@ -27,7 +27,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
-	install -Dm755 TouchpadEmulator "${pkgdir}/usr/lib/${pkgname}/TouchpadEmulator"
+    cd "${srcdir}"
+	install -Dm755 "${pkgname}/TouchpadEmulator" "${pkgdir}/usr/lib/${pkgname}/TouchpadEmulator"
 	install -Dm755 launch-script "${pkgdir}/usr/bin/touchpad-emulator"
 }
