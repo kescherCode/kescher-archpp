@@ -1,0 +1,6 @@
+[Unit]
+Description=Quectel EG25 autorestart
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/eg25-autorestart/eg25-autorestart.sh
