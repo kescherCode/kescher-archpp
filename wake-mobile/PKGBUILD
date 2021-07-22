@@ -1,0 +1,37 @@
+# Maintainer: lajonss <l3n1@dupaw.eu>
+pkgname=wake-mobile
+pkgver=1.7
+pkgrel=1
+pkgdesc="Proof-of-concept alarm app that uses systemd timers to wake up the system"
+arch=('x86_64' 'aarch64')
+url="https://gitlab.gnome.org/kailueke/wake-mobile"
+license=('GPL2')
+depends=(
+	'desktop-file-utils'
+	'gobject-introspection-runtime'
+	'glib2'
+	'hicolor-icon-theme'
+	'libcanberra'
+	'libpulse'
+	'python-gobject'
+	'python-psutil'
+)
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+source=(https://gitlab.gnome.org/kailueke/wake-mobile/-/archive/$pkgver/wake-mobile-$pkgver.tar.gz)
+sha256sums=('c55fc9d4f42387b2674b15eec7bc7810d3b47e2702064ef03b125330a744137d')
+
+prepare() {
+	cd "$srcdir/$pkgname-$pkgver"
+	sed -i 's/\/lib\/systemd/\/usr\/lib\/systemd/' Makefile
+}
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
