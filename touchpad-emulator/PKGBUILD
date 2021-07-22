@@ -1,5 +1,3 @@
-# Maintainer: Jeremy Kescher <jeremy@kescher.at>
-
 pkgname=touchpad-emulator
 pkgver=r21.945054c
 pkgrel=1

@@ -1,4 +1,4 @@
-# Maintainer: lajonss <l3n1@dupaw.eu>
+# Based on AUR package wake-mobile-git by lajonss
 pkgname=wake-mobile
 pkgver=1.7
 pkgrel=1

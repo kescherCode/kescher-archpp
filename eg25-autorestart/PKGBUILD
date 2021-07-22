@@ -1,4 +1,3 @@
-# Maintainer: Jeremy Kescher <jeremy@kescher.at>
 pkgname=eg25-autorestart
 pkgver=0.1
 pkgrel=1
