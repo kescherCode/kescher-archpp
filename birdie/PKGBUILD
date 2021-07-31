@@ -13,7 +13,7 @@ sha512sums=('SKIP')
 
 pkgver() {
     cd "$pkgname"
-    git log --oneline --max-count=1 --no-decorate | cut -f 1 -d ' '
+    git describe --tags | sed 's/-/+/g'
 }
 
 prepare() {
