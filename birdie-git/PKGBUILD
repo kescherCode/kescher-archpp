@@ -1,7 +1,7 @@
 pkgname=birdie-git
 provides=('birdie')
 pkgver=r61.14831c3
-pkgrel=1
+pkgrel=2
 pkgdesc="Alarm app designed for Linux phones."
 arch=('x86_64' 'i686' 'aarch64')
 url="https://github.com/Dejvino/birdie"

@@ -1,7 +1,7 @@
 # Based on AUR package wake-mobile-git by lajonss
 pkgname=wake-mobile
 pkgver=1.7
-pkgrel=2
+pkgrel=3
 pkgdesc="Proof-of-concept alarm app that uses systemd timers to wake up the system"
 arch=('x86_64' 'aarch64')
 url="https://gitlab.gnome.org/kailueke/wake-mobile"
