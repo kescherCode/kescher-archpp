@@ -8,6 +8,7 @@ url="https://github.com/Dejvino/birdie"
 license=('GPL2')
 depends=('python-psutil' 'python-mpris_server' 'phosh')
 makedepends=('git')
+conflicts=('wake-mobile')
 source=("$pkgname::git+${url}.git")
 sha512sums=('SKIP')
 

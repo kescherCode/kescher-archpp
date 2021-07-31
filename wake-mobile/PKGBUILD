@@ -17,7 +17,7 @@ depends=(
 	'python-psutil'
 )
 provides=("${pkgname}")
-conflicts=("${pkgname}")
+conflicts=("${pkgname}" 'birdie')
 source=(https://gitlab.gnome.org/kailueke/wake-mobile/-/archive/$pkgver/wake-mobile-$pkgver.tar.gz)
 sha256sums=('c55fc9d4f42387b2674b15eec7bc7810d3b47e2702064ef03b125330a744137d')
 
