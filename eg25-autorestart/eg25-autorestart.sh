@@ -25,7 +25,7 @@ if [ "$restart_modem" = true ]; then
         modem_manager+=(ofono)
     fi
     
-    systemctl stop "${modem_manager[@]}" eg25-manager
+    systemctl stop eg25-manager "${modem_manager[@]}"
     sleep 2
     
     # The following is modified work from Dreemurrs Embedded Labs / DanctNIX Community, Copyright (C) 2020.
