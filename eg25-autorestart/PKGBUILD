@@ -5,7 +5,7 @@ pkgdesc="Systemd timer to autorestart your EG25 modem when it disappears"
 arch=(any)
 license=('GPL2')
 source=(eg25-autorestart.{sh,service,timer})
-sha256sums=('ed67c0fc9cf95e5fdbdc60efea3372e493f9d8ad697faabf578cb5da9bde520e'
+sha256sums=('80c37203366fbbdc7230867ccf07e0b0b63c577ad1504115e83420e6bba17d86'
             '7b1980434758a41d03a65f0b726a769a870bed99f01b7a8cab4f98b2207348f1'
             '7dae9baef723613f7efeb3c3e5d614f347157225d7ce97149460302a14ff8243')
 
