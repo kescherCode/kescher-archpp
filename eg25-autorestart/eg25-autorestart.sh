@@ -18,8 +18,15 @@ done
 fi
 
 if [ "$restart_modem" = true ]; then
+    if systemctl -q is-enabled ModemManager; then
+        modem_manager=ModemManager
+    elif systemctl -q is-enabled ofono; then
+        modem_manager=ofono
+    else
+        modem_manager=""
+    fi
     
-    systemctl stop ModemManager eg25-manager
+    systemctl stop "$modem_manager" eg25-manager
     sleep 2
     
     # The following is modified work from Dreemurrs Embedded Labs / DanctNIX Community, Copyright (C) 2020.
@@ -64,5 +71,5 @@ if [ "$restart_modem" = true ]; then
             echo $i > /sys/class/gpio/unexport || exit 1
     done
 
-    systemctl restart ModemManager eg25-manager
+    systemctl restart "$modem_manager" eg25-manager
 fi
