@@ -18,9 +18,12 @@ done
 fi
 
 if [ "$restart_modem" = true ]; then
-    modem_manager=ModemManager
-    if systemctl -q is-active ofono; then
+    if systemctl -q is-enabled ModemManager; then
+        modem_manager=ModemManager
+    elif systemctl -q is-enabled ofono; then
         modem_manager=ofono
+    else
+        modem_manager=""
     fi
     
     systemctl stop "$modem_manager" eg25-manager
