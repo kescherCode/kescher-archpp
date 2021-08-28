@@ -19,12 +19,10 @@ fi
 
 if [ "$restart_modem" = true ]; then
     modem_manager=()
-    run_ofonoctl=false
     if systemctl -q is-enabled ModemManager; then
         modem_manager+=(ModemManager)
     elif systemctl -q is-enabled ofono; then
         modem_manager+=(ofono)
-        run_ofonoctl=true
     fi
     
     systemctl stop eg25-manager "${modem_manager[@]}"
@@ -73,7 +71,4 @@ if [ "$restart_modem" = true ]; then
     done
 
     systemctl restart "${modem_manager[@]}" eg25-manager
-    if [ "$run_ofonoctl" = true ]; then
-        ofonoctl online
-    fi
 fi
