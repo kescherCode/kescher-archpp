@@ -1,13 +1,13 @@
 pkgname=eg25-autorestart
-pkgver=0.3
+pkgver=0.4
 pkgrel=1
 pkgdesc="Systemd timer to autorestart your EG25 modem when it disappears"
 arch=(any)
 license=('GPL2')
 source=(eg25-autorestart.{sh,service,timer})
-sha256sums=('5e3a283046784e621841f69a57960841b23fe9dfd280387d00775beac22d820b'
-            '7b1980434758a41d03a65f0b726a769a870bed99f01b7a8cab4f98b2207348f1'
-            '7dae9baef723613f7efeb3c3e5d614f347157225d7ce97149460302a14ff8243')
+sha256sums=('99d15c1060390f02841e67260eff42010e7546212e2219b43aed3afff38fdbcf'
+            'd9b429c98ea258f251bbceffde8fa857401537b4ceca04e72472fe54c16ff1f1'
+            '297f04ae20b58e60cec3e2c90aaaa3d9736727afa5b88eab0121d2f58ad28a5f')
 
 package() {
     install -Dm 744 "$srcdir"/eg25-autorestart.sh "$pkgdir"/usr/lib/eg25-autorestart/eg25-autorestart.sh

@@ -17,6 +17,10 @@ for i in {0..3}; do
 done
 fi
 
+if ! systemctl -q is-active eg25-manager; then
+    restart_modem=false
+fi
+
 if [ "$restart_modem" = true ]; then
     modem_manager=()
     if systemctl -q is-enabled ModemManager; then

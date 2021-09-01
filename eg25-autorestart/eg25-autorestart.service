@@ -1,5 +1,6 @@
 [Unit]
 Description=Quectel EG25 autorestart
+RefuseManualStop=true
 
 [Service]
 Type=oneshot
