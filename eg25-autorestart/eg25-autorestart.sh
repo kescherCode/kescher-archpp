@@ -1,24 +1,42 @@
 #!/usr/bin/env bash
 
 prefix="/dev/serial/by-id"
-device="usb-Quectel_EG25-G-if0"
+devices=("usb-Quectel_EG25-G-if0" "usb-Quectel__Incorporated_LTE_Module_24400821-if0")
 suffix="-port0"
 restart_modem=false
 
-if [ ! -d "$prefix" ]; then
-    restart_modem=true
-fi 
-
-if [ "$restart_modem" = false ]; then
-for i in {0..3}; do
-    if [ ! -L "$prefix/$device""$i""$suffix" ]; then
-        restart_modem=true
-    fi
-done
+if ! systemctl -q is-active eg25-manager; then
+    exit
 fi
 
-if ! systemctl -q is-active eg25-manager; then
-    restart_modem=false
+if [ ! -d "$prefix" ]; then
+    restart_modem=true
+fi
+
+modem_found=false
+
+if [ "$restart_modem" = false ]; then
+    for device in "${devices[@]}"; do
+        for i in {0..3}; do
+            if [ -L "$prefix/$device""$i""$suffix" ]; then
+                modem_found=true
+                break
+            fi
+        done
+        if [ "$modem_found" = true ]; then
+            for i in {0..3}; do
+                if [ ! -L "$prefix/$device""$i""$suffix" ]; then
+                    restart_modem=true
+                    break 2
+                fi
+            done
+        fi
+    done
+fi
+
+# If we didn't find any modem, but the prefix path exists, this means our modem is gone.
+if [ "$modem_found" = false ]; then
+    restart_modem=true
 fi
 
 if [ "$restart_modem" = true ]; then
