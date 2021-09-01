@@ -1,5 +1,5 @@
 pkgname=eg25-autorestart
-pkgver=0.4
+pkgver=0.5
 pkgrel=1
 pkgdesc="Systemd timer to autorestart your EG25 modem when it disappears"
 arch=(any)
