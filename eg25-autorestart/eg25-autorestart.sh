@@ -3,46 +3,31 @@
 prefix="/dev/serial/by-id"
 devices=("usb-Quectel_EG25-G-if0" "usb-Quectel__Incorporated_LTE_Module_*-if0")
 suffix="-port0"
-restart_modem=false
 
 if ! systemctl -q is-active eg25-manager; then
     exit
 fi
 
-if [ ! -d "$prefix" ]; then
-    restart_modem=true
-fi
-
-modem_found=false
-
-if [ "$restart_modem" = false ]; then
+if [ -d "$prefix" ]; then
     for device in "${devices[@]}"; do
         for i in {0..3}; do
-            # shellcheck disable=SC2027,SC2086
-            if [ -L "$prefix/"$device"$i""$suffix" ]; then
-                modem_found=true
-                break
+            if [ -L "$prefix/""$device""$i""$suffix" ]; then
+                # Found a symlink, check if all links exist for this device
+                for j in {0..3}; do
+                    if [ ! -L "$prefix/""$device""$j""$suffix" ]; then
+                        break 2
+                    fi
+                done
+                # All links found, no need to restart modem
+                exit
             fi
         done
-        if [ "$modem_found" = true ]; then
-            for i in {0..3}; do
-                # shellcheck disable=SC2027,SC2086
-                if [ ! -L "$prefix/"$device"$i""$suffix" ]; then
-                    restart_modem=true
-                    break
-                fi
-            done
-        fi
-        if [ "$modem_found" = true ]; then
-            break
-        fi
     done
 fi
 
-# If we didn't find any modem, but the prefix path exists, this means our modem is gone.
-if [ "$modem_found" = false ]; then
-    restart_modem=true
-fi
+# Either the prefix path did not exist, or no complete set of symlinks
+# could be found under any device name; restart modem.
+restart_modem=true
 
 if [ "$restart_modem" = true ]; then
     modem_manager=()
