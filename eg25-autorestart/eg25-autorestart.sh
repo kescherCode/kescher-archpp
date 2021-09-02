@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 prefix="/dev/serial/by-id"
-devices=("usb-Quectel_EG25-G-if0" "usb-Quectel__Incorporated_LTE_Module_24400821-if0")
+devices=("usb-Quectel_EG25-G-if0" "usb-Quectel__Incorporated_LTE_Module_*-if0")
 suffix="-port0"
 restart_modem=false
 
@@ -18,18 +18,23 @@ modem_found=false
 if [ "$restart_modem" = false ]; then
     for device in "${devices[@]}"; do
         for i in {0..3}; do
-            if [ -L "$prefix/$device""$i""$suffix" ]; then
+            # shellcheck disable=SC2027,SC2086
+            if [ -L "$prefix/"$device"$i""$suffix" ]; then
                 modem_found=true
                 break
             fi
         done
         if [ "$modem_found" = true ]; then
             for i in {0..3}; do
-                if [ ! -L "$prefix/$device""$i""$suffix" ]; then
+                # shellcheck disable=SC2027,SC2086
+                if [ ! -L "$prefix/"$device"$i""$suffix" ]; then
                     restart_modem=true
-                    break 2
+                    break
                 fi
             done
+        fi
+        if [ "$modem_found" = true ]; then
+            break
         fi
     done
 fi
