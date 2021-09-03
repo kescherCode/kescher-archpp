@@ -11,10 +11,10 @@ fi
 if [ -d "$prefix" ]; then
     for device in "${devices[@]}"; do
         for i in {0..3}; do
-            if [ -L "$prefix/""$device""$i""$suffix" ]; then
+            if [ -L "$prefix/"$device"$i""$suffix" ]; then
                 # Found a symlink, check if all links exist for this device
                 for j in {0..3}; do
-                    if [ ! -L "$prefix/""$device""$j""$suffix" ]; then
+                    if [ ! -L "$prefix/"$device"$j""$suffix" ]; then
                         break 2
                     fi
                 done
