@@ -11,9 +11,11 @@ fi
 if [ -d "$prefix" ]; then
     for device in "${devices[@]}"; do
         for i in {0..3}; do
+            # shellcheck disable=SC2027,SC2086
             if [ -L "$prefix/"$device"$i""$suffix" ]; then
                 # Found a symlink, check if all links exist for this device
                 for j in {0..3}; do
+                    # shellcheck disable=SC2027,SC2086
                     if [ ! -L "$prefix/"$device"$j""$suffix" ]; then
                         break 2
                     fi
