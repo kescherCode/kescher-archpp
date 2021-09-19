@@ -21,7 +21,8 @@ systemctl start eg25-autorestart.service
 To do so, run:
 
 ```
-systemctl disable --now eg25-autorestart.{service,timer}
+systemctl disable --now eg25-autorestart.timer
+sleep 1 && while systemctl -q is-active eg25-autorestart.service; do sleep 1; done
 ```
 
 And use the instructions to enable it again once you're done.
