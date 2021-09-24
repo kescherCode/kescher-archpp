@@ -1,0 +1,9 @@
+post_install() {
+	printf "%s\n" "To use eg25-autorestart, run: " "systemctl enable --now eg25-autorestart.timer" "" \
+	              "To try restarting immediately, run: " "systemctl start eg25-autorestart.service" "" \
+	              "Remember to stop the timer when flashing modem firmware to avoid an unwanted restart (and the resulting corruption)!"
+}
+
+pre_remove() {
+	systemctl disable --now eg25-autorestart.timer
+}
